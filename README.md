@@ -1,1 +1,1 @@
-firabase-cloud-messaging-with-angular
+firebase-cloud-messaging-with-angular
