@@ -2,8 +2,10 @@
 <br>
 <br>
 
-<span>Process Situation</span>
-{{ message | async | json }}
+<p>Messages : </p>
+<div *ngFor="let m of messages">
+    {{m}}
+</div>
 
 
 <router-outlet></router-outlet>

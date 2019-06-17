@@ -9,21 +9,27 @@ import { MessagingService } from "./shared/messaging.service";
 })
 export class AppComponent implements OnInit {
 
-  message;
+  //message;
+  messages: string[] = [];
+  userid;
   constructor(private fileService: FileService, private messagingService: MessagingService) { }
 
   calculate() {
-    this.fileService.postParameters({
-      userid: 'GET USERID FROM BROWSER CONSOLE',
+    const parameterObject = {
+      userid : this.messagingService.currentToken.value,
       x: '1',
       y: '3',
       z: '4'
-    }).subscribe();
+    };
+    this.fileService.postParameters(parameterObject).subscribe();
   }
   ngOnInit() {
     const userId = 'user';
     this.messagingService.requestPermission(userId);
     this.messagingService.receiveMessage();
-    this.message = (this.messagingService.currentMessage);
+    //this.message = (this.messagingService.currentMessage);
+    (this.messagingService.currentMessage.subscribe((message: any) => {
+      this.messages.push(message);
+    }));
   }
 }
